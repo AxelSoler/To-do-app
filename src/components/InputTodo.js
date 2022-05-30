@@ -1,19 +1,19 @@
-import React from "react"
+import React, { Component } from "react"
 
-const InputTodo = () => {
-  let state = {
+class InputTodo extends Component {
+  state = {
     title: "",
   }
 
-  const onChange = e => {
+  onChange = e => {
     this.setState({
       [e.target.name]: e.target.value,
     })
   }
 
-  const handleSubmit = e => {
+  handleSubmit = e => {
     e.preventDefault()
-    if (state.title.trim()) {
+    if (this.state.title.trim()) {
       this.props.addTodoProps(this.state.title)
       this.setState({
         title: "",
@@ -22,20 +22,21 @@ const InputTodo = () => {
       alert("Please write item")
     }
   }
+
+  render() {
     return (
-      
-      <form onSubmit={handleSubmit} className="form-container">
+      <form onSubmit={this.handleSubmit} className="form-container">
         <input
           type="text"
           className="input-text"
           placeholder="Add todo..."
-          value={state.title}
+          value={this.state.title}
           name="title"
-          onChange={onChange}
+          onChange={this.onChange}
         />
         <button className="input-submit">Submit</button>
       </form>
     )
-
+  }
 }
 export default InputTodo;
